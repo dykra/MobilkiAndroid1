@@ -4,6 +4,7 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
+import android.os.AsyncTask;
 import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -18,6 +19,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
@@ -30,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
     private Button mulButton;
     private Button divButton;
     private Button piButton;
+    private ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +51,7 @@ public class MainActivity extends AppCompatActivity {
         mulButton = (Button) findViewById(R.id.mulButton);
         divButton = (Button) findViewById(R.id.divButton);
         piButton = (Button) findViewById(R.id.piButton);
+        progressBar = (ProgressBar) findViewById(R.id.progressBar);
 
         // Handle actions
         addButton.setOnClickListener(new View.OnClickListener() {
@@ -105,18 +109,13 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
-    }
 
-    private Double getValueFromInput(EditText editTextInput){
-        String inputTextValue = editTextInput.getText().toString();
-        if (inputTextValue.equals("")){
-            return null;
-        }
-        return Double.parseDouble(inputTextValue);
-    }
-
-    private void setResult(double result) {
-        resultEditText.setText(Double.toString(result));
+        piButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                progressBar.setProgress(0);
+                new PiComputeTask().execute();
+            }
+        });
     }
 
     @Override
@@ -151,6 +150,7 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(MainActivity.this, "Logic Service Connected!",
                     Toast.LENGTH_SHORT).show();
         }
+
         public void onServiceDisconnected(ComponentName className) {
             logicService = null;
             mBound = false;
@@ -158,20 +158,62 @@ public class MainActivity extends AppCompatActivity {
                     Toast.LENGTH_SHORT).show();
         }
     };
+
     @Override
     protected void onStart() {
         super.onStart();
         if (!mBound) {
-            this.bindService(new Intent(MainActivity.this,LogicService.class),
+            this.bindService(new Intent(MainActivity.this, LogicService.class),
                     logicConnection, Context.BIND_AUTO_CREATE);
         }
     }
+
     @Override
     protected void onStop() {
         super.onStop();
         if (mBound) {
             mBound = false;
             this.unbindService(logicConnection);
+        }
+    }
+
+    private Double getValueFromInput(EditText editTextInput) {
+        String inputTextValue = editTextInput.getText().toString();
+        if (inputTextValue.equals("")) {
+            return null;
+        }
+        return Double.parseDouble(inputTextValue);
+    }
+
+    private void setResult(double result) {
+        resultEditText.setText(Double.toString(result));
+    }
+
+    private class PiComputeTask extends AsyncTask<Void, Integer, Double> {
+        protected Double doInBackground(Void... voids) {
+            int k = 0;
+            int n = 1000000;
+            double x, y;
+            for (int i = 0; i < n; i++) {
+                x = Math.random();
+                y = Math.random();
+                if (x * x + y * y <= 1) k++;
+
+                if (i % 1000 == 0) {
+                    publishProgress(i*100/n);
+                }
+            }
+            return 4. * k / n;
+        }
+
+        protected void onPostExecute(Double result) {
+            firstNumberInput.setText(result.toString());
+        }
+
+        @Override
+        protected void onProgressUpdate(Integer... values) {
+            super.onProgressUpdate(values);
+            progressBar.setProgress(values[0]);
         }
     }
 }

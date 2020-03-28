@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".MainActivity"
+    tools:showIn="@layout/activity_main">
+
+    <EditText
+        android:id="@+id/firstNumberInput"
+        android:layout_width="163dp"
+        android:layout_height="41dp"
+        android:ems="10"
+        android:inputType="numberDecimal"
+        tools:layout_editor_absoluteX="110dp"
+        tools:layout_editor_absoluteY="74dp" />
+
+    <EditText
+        android:id="@+id/resultEditText"
+        android:layout_width="163dp"
+        android:layout_height="41dp"
+        android:ems="10"
+        android:inputType="numberDecimal"
+        tools:layout_editor_absoluteX="81dp"
+        tools:layout_editor_absoluteY="390dp" />
+
+    <Button
+        android:id="@+id/subButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="-"
+        tools:layout_editor_absoluteX="118dp"
+        tools:layout_editor_absoluteY="242dp" />
+
+    <Button
+        android:id="@+id/mulButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="*"
+        tools:layout_editor_absoluteX="213dp"
+        tools:layout_editor_absoluteY="242dp" />
+
+    <Button
+        android:id="@+id/duvButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="/"
+        tools:layout_editor_absoluteX="307dp"
+        tools:layout_editor_absoluteY="242dp" />
+
+    <TextView
+        android:id="@+id/secondNumberLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Liczba2"
+        tools:layout_editor_absoluteX="24dp"
+        tools:layout_editor_absoluteY="138dp" />
+
+    <Button
+        android:id="@+id/piButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Policz liczbę Pi"
+        tools:layout_editor_absoluteX="137dp"
+        tools:layout_editor_absoluteY="303dp" />
+
+    <TextView
+        android:id="@+id/firstNumberLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Liczba1"
+        tools:layout_editor_absoluteX="22dp"
+        tools:layout_editor_absoluteY="96dp" />
+
+    <Button
+        android:id="@+id/addButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="+"
+        tools:layout_editor_absoluteX="22dp"
+        tools:layout_editor_absoluteY="242dp" />
+
+    <TextView
+        android:id="@+id/resultLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Wynik"
+        tools:layout_editor_absoluteX="22dp"
+        tools:layout_editor_absoluteY="403dp" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="338dp"
+        android:layout_height="wrap_content"
+        tools:layout_editor_absoluteX="72dp"
+        tools:layout_editor_absoluteY="99dp">
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <EditText
+        android:id="@+id/secondNumberInput"
+        android:layout_width="163dp"
+        android:layout_height="41dp"
+        android:ems="10"
+        android:inputType="numberDecimal"
+        tools:layout_editor_absoluteX="110dp"
+        tools:layout_editor_absoluteY="127dp" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
